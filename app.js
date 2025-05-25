@@ -6,6 +6,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authRoutes/index')
 const adminRoute = require('./routes/admin/routes')
+const shopProductRouter = require('./routes/shop/shop-routes')
 const fileUpload = require('express-fileupload')
 
 connectDB();
@@ -28,6 +29,7 @@ app.use(fileUpload({
 //routes
 app.use('/api/auth',authRoutes)
 app.use('/api/admin',adminRoute)
+app.use('/api/shop/products',shopProductRouter)
 
 
 

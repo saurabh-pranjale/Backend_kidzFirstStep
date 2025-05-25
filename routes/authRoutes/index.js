@@ -10,9 +10,9 @@ router.post('/register', authController.register);
 router.post('/login', authController.login);
 
 
-router.post('/a',authMiddleware,(req,res)=>{
+router.get('/check-auth',authMiddleware,(req,res)=>{
     
-    console.log(req.user,"decoded")
+    res.status(200).json({message:"Authentication Successfull"})
 })
 
 module.exports = router;
