@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authRoutes/index')
 const adminRoute = require('./routes/admin/routes')
 const shopProductRouter = require('./routes/shop/shop-routes')
+const shopCartRouter = require('./routes/shop/cart-routes')
+const shopAddressRouter = require('./routes/shop/adress-routes')
+const shopOrderRouter = require('./routes/shop/order-routes')
 const fileUpload = require('express-fileupload')
 
 connectDB();
@@ -30,6 +33,9 @@ app.use(fileUpload({
 app.use('/api/auth',authRoutes)
 app.use('/api/admin',adminRoute)
 app.use('/api/shop/products',shopProductRouter)
+app.use('/api/shop/cart',shopCartRouter)
+app.use('/api/shop/address',shopAddressRouter)
+app.use('/api/shop/order',shopOrderRouter)
 
 
 
