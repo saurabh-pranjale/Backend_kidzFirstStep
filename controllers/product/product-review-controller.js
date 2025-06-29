@@ -1,11 +1,14 @@
 const Order=require('../../models/order')
-const User=require('../../models/User')
-const Product=require('../../models/Products')
+const User=require('../../models/user')
+const Product=require('../../models/products')
 const ProductReview=require('../../models/review')
+
 const addProductReview = async (req, res) => {
     try {
       const { productId, userId, userName, reviewMessage, reviewValue } = req.body;
+
       const user = await User.findById(userId);
+
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
