@@ -96,7 +96,7 @@ const addWishlistProductToCart = async (req, res) => {
     req.body.quantity = 1;
 
     // Reuse addToCart logic
-    return await addToCart(req, res);
+    return await addToCart(req, res); //req.body ensures all 
   } catch (error) {
     console.error(error);
     return res.status(500).json({ success: false, message: "Server error" });

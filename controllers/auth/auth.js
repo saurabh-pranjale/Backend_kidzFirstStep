@@ -55,15 +55,17 @@ exports.login = async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign(
-      { id: user._id, role: user.role,name:user.name,email:user.email },
+      { id: user._id, role: user.role, name: user.name, email: user.email },
       JWT_SECRET,
       { expiresIn: '7d' }
     );
 
     res.cookie('token', token, {
-      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-      httpOnly: true
-    })
+      httpOnly: true,
+      secure: false, // ✅ false in development
+      sameSite: 'lax', // ✅ helps cookies work cross-origin in dev
+      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+    });
 
 
     res.status(200).json({
@@ -85,7 +87,15 @@ exports.login = async (req, res) => {
 //logout
 
 exports.logoutUser = (req, res) => {
-  res.clearCookie("token").json({
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax"
+    // path: "/", // ✅ also match this if you set it during login
+  });
+
+  // ✅ Always respond
+  return res.status(200).json({
     success: true,
     message: "Logged out successfully!",
   });
