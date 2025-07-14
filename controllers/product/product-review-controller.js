@@ -42,7 +42,7 @@ const addProductReview = async (req, res) => {
 
       await Product.findByIdAndUpdate(productId, { averageReview });
   
-      return res.status(201).json({ message: "Review added successfully" });
+      return res.status(201).json({success:true, message: "Review added successfully" });
     } catch (e) {
       console.log(e);
       res.status(500).json({
